@@ -2,7 +2,7 @@
     "build": {
       "core": "arduino",
       "cpu": "cortex-m0plus",
-      "extra_flags": "-D ARDUINO_RASPBERRY_PI_PICO -DARDUINO_ARCH_RP2040",
+      "extra_flags": "-D ARDUINO_RASPBERRY_PI_PICO -DARDUINO_ARCH_RP2040 -DPICO_BOOT_STAGE2_CHOOSE_GENERIC_03H=1",
       "f_cpu": "133000000L",
       "hwids": [
         [
@@ -21,7 +21,7 @@
     "frameworks": [
       "arduino"
     ],
-    "name": "Raspberry Pi Pico",
+    "name": "Piccolo",
     "upload": {
       "maximum_ram_size": 270336,
       "maximum_size": 2097152,
@@ -34,9 +34,10 @@
         "cmsis-dap",
         "jlink",
         "raspberrypi-swd",
-        "picotool"
+        "picotool",
+        "uf2"
       ]
     },
-    "url": "https://www.raspberrypi.org/products/raspberry-pi-pico/",
-    "vendor": "Raspberry Pi"
+    "url": "https://github.com/akuker/piccolo",
+    "vendor": "akuker"
   }
