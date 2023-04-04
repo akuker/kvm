@@ -8,15 +8,18 @@ def tick(timer):
 
 tim.init(freq=2.5, mode=Timer.PERIODIC, callback=tick)
 
-
-button1 = Pin(22, Pin.IN)
-button2 = Pin(26, Pin.IN)
-button3 = Pin(27, Pin.IN)
-button4 = Pin(28, Pin.IN)
+# NOTE: These do not line up with the schematic!
+# Ex:
+#   SW1 is actually button4
+#   SW4 is actually button1
+button1 = Pin(28, Pin.IN)
+button2 = Pin(27, Pin.IN)
+button3 = Pin(26, Pin.IN)
+button4 = Pin(22, Pin.IN)
 
 gpioSelU1 = Pin(19, Pin.OUT)
-gpioSelU2 = Pin(18, Pin.OUT)
-gpioOeU1 = Pin(17, Pin.OUT)
+gpioSelU2 = Pin(17, Pin.OUT)
+gpioOeU1 = Pin(18, Pin.OUT)
 gpioOeU2 = Pin(16, Pin.OUT)
 
 prevButton1 = False
@@ -33,22 +36,26 @@ SELECT_CHAN_2 = 1
 
 def selectVGA(num):
     if(num == 1):
+        print("Select VGA 1")
         gpioOeU1.value(OUTPUT_ENABLED)
         gpioOeU2.value(OUTPUT_DISABLED)
         gpioSelU1.value(SELECT_CHAN_1)
         # Don't care: gpioSelU2
     elif(num == 2):
+        print("Select VGA 2")
         gpioOeU1.value(OUTPUT_ENABLED)
         gpioOeU2.value(OUTPUT_DISABLED)
         gpioSelU1.value(SELECT_CHAN_2)
         # Don't care: gpioSelU2
     elif(num==3):
+        print("Select VGA 3")
         gpioOeU1.value(OUTPUT_DISABLED)
         gpioOeU2.value(OUTPUT_ENABLED)
         # Don't care: gpioSelU1
         gpioSelU2.value(SELECT_CHAN_1)
 
     else:
+        print("Select VGA 4")
         gpioOeU1.value(OUTPUT_DISABLED)
         gpioOeU2.value(OUTPUT_ENABLED)
         # Don't care: gpioSelU1
@@ -58,22 +65,22 @@ def selectVGA(num):
 
 while(True):
     if(prevButton1 != button1.value()):
-        print("Button1 changed to " + str(button1.value()))
         prevButton1 = button1.value()
         if(prevButton1 == BUTTON_PUSHED):
+            print("Button1 pushed")
             selectVGA(1)
     if(prevButton2 != button2.value()):
-        print("Button2 changed to " + str(button2.value()))
         prevButton2 = button2.value()
         if(prevButton2 == BUTTON_PUSHED):
+            print("Button2 pushed")
             selectVGA(2)
     if(prevButton3 != button3.value()):
-        print("Button3 changed to " + str(button3.value()))
         prevButton3 = button3.value()
         if(prevButton3 == BUTTON_PUSHED):
+            print("Button3 pushed")
             selectVGA(3)
     if(prevButton4 != button4.value()):
-        print("Button4 changed to " + str(button4.value()))
         prevButton4 = button4.value()
         if(prevButton4 == BUTTON_PUSHED):
+            print("Button4 pushed")
             selectVGA(4)
